@@ -1,6 +1,7 @@
 from item import Item
 from npc import NPC
 from location import Location
+import datetime as dt
 
 from typing import *
 import random
@@ -43,7 +44,18 @@ class Game:
         raise NotImplementedError
 
     def show_help(self, args=None) -> None:
-        raise NotImplementedError
+        time = dt.datetime.now().strftime("%I:%M %p")
+        print("Here are the commands you can use:" 
+              "\n- look [item/NPC]: Look at an item or NPC in your current location."
+              "\n- go [direction]: Move in a direction (north, south, east, west)."
+              "\n- take [item]: Take an item from your current location."
+              "\n- give [item]: Give an item from your inventory to the elf."
+              "\n- items: Show the items in your inventory."
+              "\n- talk [NPC]: Talk to an NPC in your current location."
+              "\n- meet [NPC]: Meet an NPC in your current location to see their description."
+              "\n- quit: Quit the game."
+              "\n- ?/help: Show this help message."
+              f"\n {time}")
 
     def talk(self, name) -> None:
         raise NotImplementedError
