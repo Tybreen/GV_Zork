@@ -44,7 +44,7 @@ class Game:
         raise NotImplementedError
 
     def show_help(self, args=None) -> None:
-        time = dt.datetime.now().strftime("%I:%M %p")
+        time = dt.datetime.now().strftime("%I:%M %p").lstrip("0")
         print("Here are the commands you can use:" 
               "\n- look [item/NPC]: Look at an item or NPC in your current location."
               "\n- go [direction]: Move in a direction (north, south, east, west)."
@@ -59,7 +59,7 @@ class Game:
 
     def talk(self, name) -> None:
         raise NotImplementedError
-
+    
     def meet(self, name) -> None:
         raise NotImplementedError
 
@@ -67,10 +67,16 @@ class Game:
         raise NotImplementedError
 
     def show_items(self, args: str = None) -> None:
-        raise NotImplementedError
+        if self._player_items:
+            print("You are carrying: "
+                  + ", ".join([item.name for item in self._player_items]) + "."
+                  f"Total weight: {sum(item.weight() for item in self._player_items)} lbs.")
+        else:
+            print("You are not carrying any items.")
 
     def look(self, args: str = None) -> None:
-        raise NotImplementedError
+        if self._current_location.visited:
+            print(self._current_location.description)
 
     def take(self, item_name: str) -> None:
         raise NotImplementedError
