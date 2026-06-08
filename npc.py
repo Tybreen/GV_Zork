@@ -17,14 +17,16 @@ class NPC:
         self.message_num = 0
         self.messages = []
 
-    def add_message(self, message):
-        """Add a message to the NPC's list of messages."""
-        self.messages.append(message)
-    
-    def get_message(self):
+    @property
+    def message(self):
         """Return the NPC's message and increment the message number."""
         self.message_num += 1 % len(self.messages)
         return self.messages[self.message_num - 1]
+
+    @message.setter
+    def message(self, message):
+        """Add a message to the NPC's list of messages."""
+        self.messages.append(message)
 
     def __str__(self) -> str:
         """Return a human-readable representation of the NPC."""

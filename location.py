@@ -19,24 +19,61 @@ class Location:
     """
 
     def __init__(self, name: str, description: str) -> None:
-        raise NotImplementedError
+        self.name = name
+        self.description = description
+        self._neighbors = {}
+        self.items = []
+        self.npcs = []
+        self.visited = False
 
-    def get_locations(self) -> Dict[str, "Location"]:
-        raise NotImplementedError
+    @property
+    def location(self) -> Dict[str, "Location"]:
+        return self._neighbors
 
-    def add_location(self, direction: str, location: "Location") -> None:
-        raise NotImplementedError
+    @location.setter
+    def location(self, direction: str, location: "Location") -> None:
+        if direction in self._neighbors:
+            raise KeyError(f"Direction {direction} already exists in this location.")
+        if not location:
+            raise ValueError("Location must be a valid Location object.")
+        else:
+            self._neighbors[direction] = location
         """Ensure that location is not already in the dictionary, is in fact
     a location before adding."""
+    
+    @property
+    def item(self, item_name: str) -> Item:
+        for item in self._items:
+            if item.name == item_name:
+                return item
+        raise ValueError(f"No item named {item_name} found in this location.")
+    
+    @item.setter
+    def item(self, item: Item) -> None:
+        self.items.append(item)
 
-    def add_item(self, item: Item) -> None:
-        raise NotImplementedError
-
+    @item.deleter
     def remove_item(self, item: Item) -> None:
-        raise NotImplementedError
+        self.items.remove(item)
 
-    def add_npc(self, npc: NPC) -> None:
-        raise NotImplementedError
+    @property
+    def npc(self, npc_name: str) -> NPC:
+        for npc in self.npcs:
+            if npc.name == npc_name:
+                return npc
+        raise ValueError(f"No NPC named {npc_name} found in this location.")
+    
+    @npc.setter
+    def npc(self, npc: NPC) -> None:
+        self.npcs.append(npc)
+
+    @property
+    def visited(self) -> bool:
+        return self.visited
+    
+    @visited.setter
+    def visited(self, value: bool) -> None:
+        self.visited = value
 
     def __str__(self) -> str:
-        raise NotImplementedError
+        return f"{self.name} - {self.description}"
