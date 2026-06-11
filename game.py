@@ -1,6 +1,7 @@
 from item import Item
 from npc import NPC
 from location import Location
+from world_data import world_data
 import datetime as dt
 
 from typing import *
@@ -15,9 +16,11 @@ class Game:
     def __init__(self) -> None:
         self._commands = self._setup_commands()
         self._player_items: List[Item] = []
+        self._locations: List[Location] = []
+        self._weight = 0
 
-        # Add instance variables above here
         self._create_world()
+        print(f"self._locations: {self._locations}")
         self._current_location = self._random_location()
         self._elf_appetite = 500
         self._finished = False
@@ -41,7 +44,8 @@ class Game:
         return self._commands
 
     def _create_world(self) -> None:
-        raise NotImplementedError
+        # Reference ./world_data.py
+        self._locations = [x for x in world_data["locations"].values()]
 
     def show_help(self, args=None) -> None:
         time = dt.datetime.now().strftime("%I:%M %p").lstrip("0")
@@ -75,7 +79,10 @@ class Game:
             print("You are not carrying any items.")
 
     def look(self, args: str = None) -> None:
-        if self._current_location.visited:
+        #####
+            # TODO: Needs re-implementing!
+        #####
+        if self._current_location.get_visited():
             print(self._current_location.description)
 
     def take(self, item_name: str) -> None:
