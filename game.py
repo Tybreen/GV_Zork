@@ -62,14 +62,21 @@ class Game:
               f"\n {time}")
 
     def talk(self, name) -> None:
-        raise NotImplementedError
+        if name in Location.get_npcs():
+            print(name.get_message())
     
     def meet(self, name) -> None:
-        raise NotImplementedError
+        if name in Location.get_npcs():
+            print(name.get_description())
 
     def go(self, direction: str) -> None:
-        raise NotImplementedError
-
+        Location.set_visited(True)
+        if self._weight > 30:
+            print("You have over 30 lbs. of weight")
+            return None  #FIXME potentially? is this what to say if player over 30 weight?
+        if direction in Location.get_location():
+            self._current_location = Location.get_location()[direction]
+    
     def show_items(self, args: str = None) -> None:
         if self._player_items:
             print("You are carrying: "
@@ -82,14 +89,37 @@ class Game:
         #####
             # TODO: Needs re-implementing!
         #####
-        if self._current_location.get_visited():
-            print(self._current_location.description)
+        print(self._current_location)
+        if Location.get_items():
+            print(Location.get_items())
+        else:
+            print("There are no items in this location.")
+        if Location.get_npcs():
+            print(Location.get_npcs())
+        else:
+            print("You are alone.")
+        if Location.get_visited():
+            print(Location.get_location()) #FIXME maybe make this easier to read?
+        else:
+            print(Location.get_location().keys())
 
     def take(self, item_name: str) -> None:
-        raise NotImplementedError
+        if item_name in self._current_location:
+            Location.remove_item(item_name)
+            self._player_items.append(item_name)
+            self._weight += item_name.weight
+
 
     def give(self, item_name: str) -> None:
-        raise NotImplementedError
+        if item_name in self._player_items:
+            Location.add_item(item_name)
+            self._weight -= item_name.weight
+        if self._current_location == "Woods" #FIXME IMPLEMENT WOODS OR ELSE CODE WON'T WORK (Change name too!)
+            if item_name.calories: 
+                raise NotImplementedError
+
+    #FIXME FIXME FIXME, requries Woods and Elf mechanics I believe? 
+                
 
     def play(self) -> None:
         print(r""" 
