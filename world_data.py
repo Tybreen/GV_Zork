@@ -151,9 +151,9 @@ fieldhouse.add_item(trail_mix)
 bridge.add_location("north", kirkhof)
 bridge.add_location("east", padnos)
 bridge.add_location("west", fieldhouse)
-bridge.add_location("down", forest)
+bridge.add_location("south", forest)
 
-forest.add_location("up", bridge)
+forest.add_location("north", bridge)
 forest.add_npc(elf)
 
 ##################
