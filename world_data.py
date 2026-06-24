@@ -6,8 +6,45 @@ from location import Location
 ### Items ###
 #############
 
-test_food = Item("my_item_food", "This is a test food!", 10, 5)
-test_item = Item("my_item_nonfood", "This is a test nonfood!", 0, 25)
+pizza = Item("Pizza Slice",
+             "A large slice of pepperoni pizza from Kirkhof.",
+             220, 12)
+
+burger = Item("Campus Burger",
+              "A leftover burger from the dining hall.",
+              240, 14)
+
+protein_shake = Item("Protein Shake",
+                     "A thick protein shake from the Fieldhouse.",
+                     180, 10)
+
+donut_box = Item("Donut Box",
+                 "A box of donuts left after a club meeting.",
+                 260, 16)
+
+trail_mix = Item("Trail Mix",
+                 "A large bag of trail mix.",
+                 140, 8)
+
+textbook = Item("Cybersecurity Textbook",
+                "A heavy textbook filled with networking concepts.",
+                0, 12)
+
+laptop = Item("Gaming Laptop",
+              "A powerful laptop running far too many tabs.",
+              0, 8)
+
+laker_card = Item("Laker Card",
+                  "A student identification card.",
+                  0, 1)
+
+parking_ticket = Item("Parking Ticket",
+                      "An expensive reminder to follow parking rules.",
+                      0, 1)
+
+broken_keyboard = Item("Broken Keyboard",
+                       "Several keys are missing.",
+                       0, 5)
 
 ############
 ### NPCs ###
@@ -16,6 +53,31 @@ test_item = Item("my_item_nonfood", "This is a test nonfood!", 0, 25)
 mr_w = NPC("Mr. W", ("Mr. W is a professor at GVSU, he is very "
             "involved in computer science."))
 mr_w.add_message("Hi there! If you need any coding help just ask!")
+troy = NPC("Troy", ("Troy is a cybersecurity student who seems "
+            "determined to save the campus from the troll's spell."))
+troy.add_message("I found some food here earlier. The elf might want it.")
+troy.add_message("The Little Mac Bridge leads toward the ravines.")
+
+william = NPC("William", ("William is a computer science student "
+               "who appears oddly calm despite the frozen campus."))
+william.add_message("The elf will only save campus if it gets enough calories.")
+william.add_message("Be careful not to give it anything inedible.")
+
+tyler = NPC("Tyler", ("Tyler is a computer science student studying in the library. "
+             "He looks like he was interrupted in the middle of finals week."))
+tyler.add_message("I saw some snacks around campus before everything froze.")
+tyler.add_message("The bridge leads to the ravines where the elf lives.")
+
+coach = NPC("Coach", ("The Fieldhouse coach watches over the athletic "
+             "facilities and encourages students to stay active."))
+coach.add_message("Athletes always keep snacks nearby.")
+coach.add_message("You might find something useful around the Fieldhouse.")
+
+elf = NPC("Elf", ("A magical elf who lives in the ravines beneath "
+           "the Little Mac Bridge."))
+elf.add_message("Bring me food and I may save your campus.")
+elf.add_message("I need at least 500 calories before I can break the spell.")
+elf.add_message("Do not try to feed me junk!")
 
 #################
 ### Locations ###
@@ -34,20 +96,65 @@ henry = Location("Henry Hall", ("Henry Hall is an academic building "
             "at GVSU connected to student learning and support services. It "
             "has housed resources such as the Tutoring and Reading Center, "
             "making it a useful place for academic help."))
+library = Location("Mary Idema Pew Library", ("The Mary Idema Pew "
+            "Library serves as GVSU's main library. Students come here "
+            "to study, research, and work on assignments."))
+padnos = Location("Padnos Hall of Science", ("Padnos Hall houses "
+            "many of GVSU's science programs. Laboratories and classrooms "
+            "for biology, chemistry, and related fields are located here."))
+fieldhouse = Location("Fieldhouse", ("The Fieldhouse is one of "
+            "GVSU's athletic facilities. It hosts sporting events, "
+            "recreation activities, and fitness opportunities."))
+bridge = Location("Little Mac Bridge", ("The Little Mac Bridge is "
+            "one of GVSU's most recognizable landmarks. It spans the "
+            "ravines of the Allendale campus and connects different areas "
+            "of the university. Students cross it every day on their way "
+            "to classes."))
+forest = Location("Campus Ravines", ("Below the Little Mac Bridge lies "
+            "a wooded area of trails and ravines. The forest is quiet and "
+            "shaded, making it feel separated from the busy campus above."))
 
+mackinac.add_location("north", henry)
 mackinac.add_location("south", kirkhof)
-mackinac.add_location("west", henry)
-mackinac.add_item(test_item)
+mackinac.add_location("east", library)
+mackinac.add_item(textbook)
 mackinac.add_npc(mr_w)
 
 kirkhof.add_location("north", mackinac)
-kirkhof.add_location("west", henry)
-kirkhof.add_item(test_food)
-kirkhof.add_item(test_item)
+kirkhof.add_location("west", fieldhouse)
+kirkhof.add_location("south", bridge)
+kirkhof.add_item(pizza)
+kirkhof.add_item(parking_ticket)
+kirkhof.add_npc(troy)
 
-henry.add_location("south", kirkhof)
-henry.add_location("north", mackinac)
+henry.add_location("south", mackinac)
+henry.add_npc(william)
+henry.add_item(laker_card)
 
+library.add_location("west", mackinac)
+library.add_location("south", padnos)
+library.add_npc(tyler)
+library.add_item(laptop)
+library.add_item(donut_box)
+
+padnos.add_location("north", library)
+padnos.add_location("west", bridge)
+padnos.add_item(broken_keyboard)
+padnos.add_item(burger)
+
+fieldhouse.add_location("east", kirkhof)
+fieldhouse.add_location("south", bridge)
+fieldhouse.add_npc(coach)
+fieldhouse.add_item(protein_shake)
+fieldhouse.add_item(trail_mix)
+
+bridge.add_location("north", kirkhof)
+bridge.add_location("east", padnos)
+bridge.add_location("west", fieldhouse)
+bridge.add_location("down", forest)
+
+forest.add_location("up", bridge)
+forest.add_npc(elf)
 
 ##################
 ### World Data ###
@@ -55,15 +162,33 @@ henry.add_location("north", mackinac)
 
 world_data = {
     "items": {
-        "test_food": test_food,
-        "test_item": test_item
+        "textbook": textbook,
+        "pizza": pizza,
+        "parking_ticket": parking_ticket,
+        "laker_card": laker_card,
+        "laptop": laptop,
+        "donut_box": donut_box,
+        "broken_keyboard": broken_keyboard,
+        "burger": burger,
+        "protein_shake": protein_shake,
+        "trail_mix": trail_mix,
     },
     "npcs": {
-        "mr_w": mr_w
+        "mr_w": mr_w,
+        "troy": troy,
+        "william": william,
+        "tyler": tyler,
+        "coach": coach,
+        "elf": elf
     },
     "locations": {
         "mackinac": mackinac,
         "kirkhof": kirkhof,
-        "henry": henry
+        "henry": henry,
+        "library": library,
+        "padnos": padnos,
+        "fieldhouse": fieldhouse,
+        "bridge": bridge,
+        "forest": forest
     }
 }
