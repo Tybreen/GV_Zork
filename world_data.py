@@ -14,19 +14,19 @@ burger = Item("Campus Burger",
               "A leftover burger from the dining hall.",
               240, 14)
 
-protein_shake = Item("Protein Shake",
+shake = Item("Shake",
                      "A thick protein shake from the Fieldhouse.",
                      180, 10)
 
-donut_box = Item("Donut Box",
+donuts = Item("Donuts",
                  "A box of donuts left after a club meeting.",
                  260, 16)
 
-trail_mix = Item("Trail Mix",
+snack = Item("Snack",
                  "A large bag of trail mix.",
                  140, 8)
 
-textbook = Item("Cybersecurity Textbook",
+textbook = Item("Textbook",
                 "A heavy textbook filled with networking concepts.",
                 0, 12)
 
@@ -34,15 +34,15 @@ laptop = Item("Gaming Laptop",
               "A powerful laptop running far too many tabs.",
               0, 8)
 
-laker_card = Item("Laker Card",
+id = Item("ID",
                   "A student identification card.",
                   0, 1)
 
-parking_ticket = Item("Parking Ticket",
+ticket = Item("Ticket",
                       "An expensive reminder to follow parking rules.",
                       0, 1)
 
-broken_keyboard = Item("Broken Keyboard",
+keyboard = Item("Keyboard",
                        "Several keys are missing.",
                        0, 5)
 
@@ -124,29 +124,29 @@ kirkhof.add_location("north", mackinac)
 kirkhof.add_location("west", fieldhouse)
 kirkhof.add_location("south", bridge)
 kirkhof.add_item(pizza)
-kirkhof.add_item(parking_ticket)
+kirkhof.add_item(ticket)
 kirkhof.add_npc(troy)
 
 henry.add_location("south", mackinac)
 henry.add_npc(william)
-henry.add_item(laker_card)
+henry.add_item(id)
 
 library.add_location("west", mackinac)
 library.add_location("south", padnos)
 library.add_npc(tyler)
 library.add_item(laptop)
-library.add_item(donut_box)
+library.add_item(donuts)
 
 padnos.add_location("north", library)
 padnos.add_location("west", bridge)
-padnos.add_item(broken_keyboard)
+padnos.add_item(keyboard)
 padnos.add_item(burger)
 
 fieldhouse.add_location("east", kirkhof)
 fieldhouse.add_location("south", bridge)
 fieldhouse.add_npc(coach)
-fieldhouse.add_item(protein_shake)
-fieldhouse.add_item(trail_mix)
+fieldhouse.add_item(shake)
+fieldhouse.add_item(snack)
 
 bridge.add_location("north", kirkhof)
 bridge.add_location("east", padnos)
@@ -164,17 +164,17 @@ world_data = {
     "items": {
         "textbook": textbook,
         "pizza": pizza,
-        "parking_ticket": parking_ticket,
-        "laker_card": laker_card,
+        "ticket": ticket,
+        "id": id,
         "laptop": laptop,
-        "donut_box": donut_box,
-        "broken_keyboard": broken_keyboard,
+        "donuts": donuts,
+        "keyboard": keyboard,
         "burger": burger,
-        "protein_shake": protein_shake,
-        "trail_mix": trail_mix,
+        "shake": shake,
+        "snack": snack,
     },
     "npcs": {
-        "mr_w": mr_w,
+        "mr w": mr_w,
         "troy": troy,
         "william": william,
         "tyler": tyler,

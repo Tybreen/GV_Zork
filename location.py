@@ -71,7 +71,7 @@ class Location:
         else:
             self._neighbors[direction] = location
 
-    def get_items(self: str) -> List[Item]:
+    def get_items(self) -> List[Item]:
         """Return the items currently in the location.
 
         Returns:
@@ -95,7 +95,7 @@ class Location:
         """
         self._items.remove(item)
 
-    def get_npcs(self: str) -> List[NPC]:
+    def get_npcs(self) -> List[NPC]:
         """Return the NPCs currently in the location.
 
         Returns:
