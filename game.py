@@ -161,9 +161,6 @@ class Game:
                 self._current_location = self._random_location()
                 
                 
-                
-                
-
     def play(self) -> None:
         print(r""" 
            _______      _______ _______ _______ _    
@@ -219,3 +216,9 @@ class Game:
         print("Alas, our fair campus is doomed. Perhaps another time, Laker.")
         print()
         exit(0)
+
+    def gamble(self, args: str = None) -> None:
+        self._random_location()
+        random_num = random.choice(list(range(11)))
+        if random_num > 7:
+            self.quit
