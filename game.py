@@ -4,7 +4,7 @@ from world_data import world_data
 import datetime as dt
 
 from typing import *
-import random
+import random, time
 
 
 class Game:
@@ -44,6 +44,7 @@ class Game:
             "inventory": self.show_items,
             "talk": self.talk,
             "meet": self.meet,
+            "hack": self.hack,
             "quit": self.quit,
         }
         return self._commands
@@ -57,20 +58,36 @@ class Game:
             return world_data["items"][name]
         else:
             return None
+    def _slow_print(self, text: str, speed: float = 0.03) -> None:
+        for character in text:
+            time.sleep(speed)
+            print(character, end="", flush=True)
+        
+    def can_hack(self):
+        textbook = self._find_item_by_name("textbook")
+        computer = self._find_item_by_name("laptop")
+        items_exist = bool(textbook and computer)
+        player_has_items = bool(textbook in self._player_items and computer in self._player_items)
+        return bool(items_exist and player_has_items)
 
     def show_help(self, args=None) -> None:
         time = dt.datetime.now().strftime("%I:%M %p").lstrip("0")
-        print("Here are the commands you can use:" 
-              "\n- look/explore [item/NPC]: Look at an item or NPC in your current location."
-              "\n- go/walk/run/travel [direction]: Move in a direction (north, south, east, west)."
-              "\n- take/grab [item]: Take an item from your current location."
-              "\n- give/drop [item]: Give an item from your inventory to the elf."
-              "\n- items/inventory: Show the items in your inventory."
-              "\n- talk [NPC]: Talk to an NPC in your current location."
-              "\n- meet [NPC]: Meet an NPC in your current location to see their description."
-              "\n- quit: Quit the game."
-              "\n- ?/help: Show this help message."
-              f"\n {time}")
+        message = ("Here are the commands you can use:" 
+            "\n- look/explore [item/NPC]: Look at an item or NPC in your current location."
+            "\n- go/walk/run/travel [direction]: Move in a direction (north, south, east, west)."
+            "\n- take/grab [item]: Take an item from your current location."
+            "\n- give/drop [item]: Give an item from your inventory to the elf."
+            "\n- items/inventory: Show the items in your inventory."
+            "\n- talk [NPC]: Talk to an NPC in your current location."
+            "\n- meet [NPC]: Meet an NPC in your current location to see their description.")
+        
+        if self.can_hack():
+            message +="\n- hack: Use Claude Mythos to hack something!"
+        message += ("\n- quit: Quit the game."
+            "\n- ?/help: Show this help message."
+            f"\n {time}")
+        print(message)
+            
 
     def talk(self, name) -> None:
         for i in self._current_location._npcs:
@@ -159,6 +176,29 @@ class Game:
                     'He then recoiled and said "TASTE BAD!!!"'
                     " with a snap of his fingers, I teleported away!\n")
                 self._current_location = self._random_location()
+                
+    def hack(self, args: str = None):
+        if self.can_hack():
+            self._slow_print(
+                "You open the laptop and launch Claude Mythos, using my networking textbook intending to break into a "
+                "nearby bank vault and \"borrow\" enough money to solve the campus crisis. "
+                "Claude rapidly bypasses the firewall, spoofs an administrator token, and "
+                "begins decrypting the vault's security network. For a moment, everything "
+                "seems perfect—until the screen flashes red.\n\n"
+                "\033[1;31mINTRUSION DETECTED. TRACE IN PROGRESS.\033[0m\n\n"
+                "Security cameras begin rotating toward your location, the vault enters "
+                "emergency lockdown, and Claude warns that someone has activated a "
+                "counter-intrusion system. Your laptop's fans scream as the trace jumps "
+                "between access points and closes in on your exact position. Panicking, "
+                "you slam the laptop against the ground and stomp on it until the screen "
+                "goes black.\n\n"
+                "A few seconds later, every light in the area shuts off.\n\n"
+                "From somewhere in the darkness, a robotic voice says, "
+                "\033[31m\"TARGET LOST.\"\033[0m\n\n",
+                0.01
+            )
+        else:
+            self._slow_print("\033[31mError 404\033[0m\n\n", 0.1)
                 
                 
     def play(self) -> None:
