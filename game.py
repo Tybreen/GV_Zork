@@ -73,12 +73,14 @@ class Game:
               f"\n {time}")
 
     def talk(self, name) -> None:
-        if name in self._current_location.get_npcs():
-            print(name.get_message())
+        for i in self._current_location._npcs:
+            if str(i).lower() == name:
+                print(i.get_message())
     
     def meet(self, name) -> None:
-        if name in self._current_location.get_npcs():
-            print(name.get_description())
+        for i in self._current_location._npcs:
+            if str(i).lower() == name:
+                print(i.get_description())
 
     def go(self, direction: str) -> None:
         self._current_location.set_visited(True)
