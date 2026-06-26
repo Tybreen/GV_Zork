@@ -20,6 +20,8 @@ class Game:
 
         self._create_world()
         self._current_location = self._random_location()
+        while self._current_location == world_data["locations"]["forest"]:
+            self._current_location = self._random_location()
         self._elf_appetite = 500
         self._finished = False
 
@@ -179,8 +181,11 @@ class Game:
                 
     def hack(self, args: str = None):
         if self.can_hack():
+            laptop_item = self._find_item_by_name("laptop")
+            self._player_items.remove(laptop_item)
+            self._weight -= laptop_item.weight
             self._slow_print(
-                "You open the laptop and launch Claude Mythos, using my networking textbook intending to break into a "
+                "You open the laptop and launch Claude Mythos, using my cybersecurity textbook intending to break into a "
                 "nearby bank vault and \"borrow\" enough money to solve the campus crisis. "
                 "Claude rapidly bypasses the firewall, spoofs an administrator token, and "
                 "begins decrypting the vault's security network. For a moment, everything "

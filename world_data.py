@@ -6,11 +6,11 @@ from location import Location
 ### Items ###
 #############
 
-pizza = Item("Pizza Slice",
+pizza = Item("Pizza",
              "A large slice of pepperoni pizza from Kirkhof.",
              220, 12)
 
-burger = Item("Campus Burger",
+burger = Item("Burger",
               "A leftover burger from the dining hall.",
               240, 14)
 
@@ -27,11 +27,11 @@ snack = Item("Snack",
                  140, 8)
 
 textbook = Item("Textbook",
-                "A heavy textbook filled with networking concepts.",
+                "A heavy cybersecurity textbook filled with networking concepts.",
                 0, 12)
 
-laptop = Item("Gaming Laptop",
-              "A powerful laptop running far too many tabs.",
+laptop = Item("Laptop",
+              "A powerful gaming laptop running far too many tabs.",
               0, 8)
 
 id = Item("ID",
