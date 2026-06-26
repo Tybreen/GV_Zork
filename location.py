@@ -1,4 +1,10 @@
-"""File for the Location class."""
+"""File for the Location class.
+
+Authors:
+    Tyler Breen
+    William Adkins
+    Troy Ross
+"""
 
 from item import Item
 from npc import NPC

@@ -1,7 +1,18 @@
+"""NPC model for characters the player can meet and talk to.
+
+Authors:
+    Tyler Breen
+    William Adkins
+    Troy Ross
+"""
+
+
 class NPC:
-    """NPCs have a name, a description, and a message. The player will see their name, but
-    have to use the 'meet NPC' command to see their description. If they use the 'talk NPC'
-    command, the NPCs message will print."""
+    """Store data about a non-player character.
+
+    The player can see an NPC's name, use the meet command to see their
+    description, and use the talk command to print one of their messages.
+    """
 
     def __init__(self, name: str, description: str):
         """Initialize an NPC with its identifying gameplay data.
@@ -29,10 +40,11 @@ class NPC:
             return message
         else:
             return "The NPC has nothing more to say."
+
     def get_name(self) -> str:
         """Return the NPC's name."""
         return self.name
-    
+
     def get_description(self) -> str:
         """Return the NPC's description."""
         return self.description

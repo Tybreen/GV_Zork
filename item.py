@@ -1,4 +1,10 @@
-"""Item model for objects the player can carry during the quest."""
+"""Item model for objects the player can carry during the quest.
+
+Authors:
+    Tyler Breen
+    William Adkins
+    Troy Ross
+"""
 
 
 class Item:
