@@ -60,6 +60,7 @@ to another random location.
 - `items` or `inventory`: Show carried items and total weight.
 - `talk [NPC]`: Talk to an NPC in the current location.
 - `meet [NPC]`: Show an NPC's description.
+- `gamble`: Teleport to a random location with a chance that the game ends.
 - `quit`: End the game.
 
 The `hack` command becomes available after collecting the laptop and textbook.

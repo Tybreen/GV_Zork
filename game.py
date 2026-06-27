@@ -60,7 +60,7 @@ class Game:
             "meet": self.meet,
             "hack": self.hack,
             "quit": self.quit,
-            "gamble" : self.gamble
+            "gamble": self.gamble,
         }
         return self._commands
 
