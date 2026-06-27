@@ -107,7 +107,7 @@ class Game:
             "\n- meet [NPC]: Meet an NPC in your current location to see "
             "their description."
             "\n- gamble: Teleports you to a random location, but has a "
-            "20% chance of ended your game."
+            "20% chance of ending your game."
         )
 
         if self.can_hack():
