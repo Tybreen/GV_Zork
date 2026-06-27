@@ -60,6 +60,7 @@ class Game:
             "meet": self.meet,
             "hack": self.hack,
             "quit": self.quit,
+            "gamble" : self.gamble
         }
         return self._commands
 
@@ -105,6 +106,8 @@ class Game:
             "\n- talk [NPC]: Talk to an NPC in your current location."
             "\n- meet [NPC]: Meet an NPC in your current location to see "
             "their description."
+            "\n- gamble: Teleports you to a random location, but has a "
+            "20% chance of ended your game."
         )
 
         if self.can_hack():
@@ -326,7 +329,9 @@ class Game:
 
     def gamble(self, args: str = None) -> None:
         """Move randomly and quit when the random number is high enough."""
-        self._random_location()
+        self._current_location = self._random_location()
         random_num = random.choice(list(range(11)))
-        if random_num > 7:
-            self.quit
+        if random_num > 8:
+            self.quit()
+        else:
+            print("You have good fortune...")
